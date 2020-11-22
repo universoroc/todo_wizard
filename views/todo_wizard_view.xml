@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <record id="view_form_todo_wizard" model="ir.ui.view">
+            <field name="name">view_form_todo_wizard</field>
+            <field name="model">todo.wizard</field>
+            <field name="arch" type="xml">
+
+                <form>
+                    <div class="oe_right">
+                        <button type="object" name="todo_app_do_count_tasks"
+                                string="Count"/>
+                        <button type="object" name="todo_app_do_populate_tasks"
+                                string="Get All"/>
+                    </div>
+
+                    <field name="task_ids"/>
+                    <group>
+                        <group>
+                            <field name="new_deadline"/>
+                        </group>
+                        <group>
+                            <field name="new_user_id"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button type="object" name="todo_app_do_mass_update"
+                                string="Mass Update" class="oe_highlight"
+                                attrs="{'invisible': [
+                        ('new_deadline','=',False),
+                        ('new_user_id','=',False)
+                        ]}"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+        <!-- More button Action -->
+        <act_window id="todoroc_app.action_todo_wizard"
+                    name="To-Do Tasks Wizard"
+                    binding_model="context.todoroc_app.todoroc_app"
+                    res_model="todo.wizard"
+                    view_mode="form"
+                    target="new"
+        />
+        <menuitem id="todoroc_app.menu_todo_task_view_wizard"
+                  name="Asistente"
+                  parent="todoroc_app.menu_todo_task"
+                  sequence="12"
+                  action="todoroc_app.action_todo_wizard"/>
+
+    </data>
+</odoo>
